@@ -1,290 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kelas</title>
-    <link rel="stylesheet"
-    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-</head>
-<style type="text/css">
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+<?php 
+$page_title = "Tentang Kami";
+require_once "includes/header.php"; 
+require_once "includes/config.php";
 
-    /*  Header */
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-    }
+// Mengambil data tentang BPVP dari database (memperbarui query)
+$query = "SELECT * FROM tentang_bpvp ORDER BY id DESC LIMIT 1"; // Mengambil data terbaru berdasarkan ID dengan batasan 1
+$result = mysqli_query($koneksi, $query);
+$row = mysqli_fetch_assoc($result);
 
-    h1 {
-        color: #333;
-        font-size: 36px;
-        margin-bottom: 20px;
-        margin-left: 20px;
-    }
-
-    header li, header a, header button {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 500;
-        font-size: 14px;
-        color: #ecf0f1;
-        text-decoration: none;
-    }
-
-    header{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 20px 5%;
-        background-color: rgba(19, 54, 101, 1);
-    }
-
-    .logo{
-        cursor: pointer;
-        height: 80px;
-        width: 80px;
-        margin-right: auto ;
-    }
-
-    .nav_links{
-        list-style: none;
-    }
-
-    .nav_links li{
-        display: inline-block;
-        padding: 0px 20px;
-    }
-
-    .nav_links li a{
-        transition: all 0.3s ease 0s;
-    }
-
-    .nav_links li a:hover{
-        color: #0088a9;
-    }
-
-    button{
-        margin-left: 20px;
-        padding: 9px 25px;
-        background-color: rgba(0, 136, 169, 1);
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease 0s;
-    }
-
-    button:hover{
-        background-color: rgba(0, 136, 169, 0.8);
-    }
-
-    /*  main */
-
-    main{
-        background-color: #f0f0f0;
-    }
-
-    .cover{
-        width: 100%;
-        height: 400px;
-        flex-shrink: 0;
-        object-fit: cover;
-    }
-    
-    .kami-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start; 
-        padding: 8px;
-        margin: 16px 14px 14px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    }
-
-    .kami-content {
-        display: flex;
-        flex-direction: row; 
-        gap: 20px; 
-        padding: 8px;
-        align-items: flex-start; 
-    }
-    
-    h1 {
-        color: #000;
-        font-size: 48px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 54px;
-        margin-top: 20px; 
-    }
-
-    .kami-content p {
-        color: #000;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 32px;
-        letter-spacing: 0.5px;
-        text-align: justify;
-        word-wrap: break-word;
-        margin-bottom: 10px;
-        width: 632px; 
-        padding: 10px;
-    }
-
-    .kami-content .img-cover {
-        object-fit: cover;
-        width: 400px;
-        height: 400px;
-        flex-shrink: 0;
-        margin-left: 80px;
-        margin-bottom: 100px;
-    }
-
-    /*  Footer CSS */
-
-    .footer {
-        margin-top: 10px;
-        padding-top: 30px;
-        padding-left: 20px;
-        padding-right: 20px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-        gap: 3.5rem;
-        background-color: rgba(19, 54, 101, 1);
-    }
-
-    .logo-footer{
-        height: 200px;
-        width: 200px;
-    }
-
-    .footer-content h4{
-        color: #fff;
-        margin-bottom: 1.5rem;
-        font-size: 20px;
-    }
-
-    .footer-content li{
-        margin-bottom: 16px;
-    }
-
-    .footer-content li a{
-        display: block;
-        color: #d6d6d6;
-        font-size: 15px;
-        font-weight: 400px;
-        transition: all 0.4s ease;
-    }
-
-    .footer-content li a:hover{
-        transform: translateY(-3px) translateX(-5px);
-        color: #fff;
-    }
-
-    .footer-content p {
-        color: #d6d6d6;
-        font-size: 16px;
-        line-height: 25px; 
-        margin: 10px 0;
-        text-align: justify;
-        word-wrap: break-word;
-    }
-
-    .footer-content ul{
-        list-style: none;
-    }
-</style>
-
-<body>
-    <header>
-        <img class="logo" src="assets/img/logo.png" alt="logo">
-        <nav>
-            <ul class="nav_links">
-                <li><a href="index.php">Beranda</a></li>
-                <li><a href="pelatihan.php">Kejuruan Pelatihan</a></li>
-                <li><a href="tentang-kami.php">Tentang Kami</a></li>
-                <li><a href="berita.php">Berita</a></li>
-            </ul>
-        </nav>
-        <a class="cta" href="index.php"><button>Daftar</button></a>
-    </header>
-
-    <main>
-        <section>
-            <img class="cover" src="assets/img/img 1.jpg" alt="Gambar">
-            <div class="kami-container">
-                <h1>TENTANG BPVP SIDOARJO</h1>
-                <div class="kami-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <img class="img-cover" src="assets/img/img 7.jpg" alt="Gambar">
+// Menampilkan data tentang BPVP
+?>
+<section class="contact">
+    <div class="featured-image">
+        <?php if (!empty($row['featured_image'])) : ?>
+            <img class="cover" src="assets/img/<?php echo $row['featured_image']; ?>" alt="Gambar">
+        <?php else : ?>
+            <img class="cover" src="assets/img/img 7.jpg" alt="Default Gambar">
+        <?php endif; ?>
+    </div>
+    <div class="kami-container">
+        <h1><?php echo $row['title']; ?></h1>
+        <div class="kami-content">
+            <div class="contact-content">
+                <p><?php echo $row['description']; ?></p>
+            </div>
+            <div class="contact-content featured">
+                <?php if (!empty($row['featured_image'])) : ?>
+                    <img class="img-cover" src="assets/img/<?php echo $row['featured_image']; ?>" alt="Gambar">
+                <?php else : ?>
+                    <img class="img-cover" src="assets/img/img 7.jpg" alt="Default Gambar">
+                <?php endif; ?>
+            </div>
+        </div>
+        <h1>Alamat BPVP Sidoarjo</h1>
+        <div class="kami-content">
+            <div class="address">
+                <i class="fa-solid fa-location-dot"></i>
+                <span><strong>BPVP SIDOARJO</strong> <?php echo $row['address']; ?></span>
+            </div>
+            <?php echo $row['map_embed']; ?>
+        </div>
+        <h1>Contact Us</h1>
+        <div class="contact-us">
+            <form class="area-one" action="cms/utils/proses_input_contact_us.php" method="POST">
+                <div class="form-action">
+                    <label for="name">Name:</label>
+                    <input class="input-action" type="text" name="name" id="name" value="" require>
                 </div>
-                <h1>ALAMAT BPVP SIDOARJO</h1>
-                <div class="kami-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <img class="img-cover" src="assets/img/img 8.jpg" alt="Gambar">
+                <div class="form-action">
+                    <label for="email">Email:</label>
+                    <input class="input-action" type="email" name="email" id="email" value="" require>
                 </div>
-                <h1>INFO BPVP SIDOARJO</h1>
-                <div class="kami-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <img class="img-cover" src="assets/img/img 6.jpg" alt="Gambar">
+                <div class="form-action">
+                    <label for="message">Message:</label>
+                    <textarea class="input-action" name="message" id="message" value="" row=4></textarea>
                 </div>
-            </div>
-            
-        </section>
-    </main>
+                <button type="submit" class="btn add">Kirim</button>
+            </form>
+            <?php
+            // Menampilkan pesan sukses jika ada
+            if (isset($_GET['status']) && $_GET['status'] === 'success') {
+                echo '<p class="success-message">Pesan berhasil dikirim!</p>';
+            }
+            ?>
+        </div>
+    </div>
+</section>
 
-    <footer>
-        <section class="footer">
-            <div class="footer-content">
-                <img class="logo-footer" src="assets/img/logo.png" alt="logo">
-            </div>
-
-            <div class="footer-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-
-            <div class="footer-content">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="#">Email</a></li>
-                    <li><a href="#">Alamat</a></li>
-                    <li><a href="#">No Telepon</a></li>
-                    <li><a href="#">No Wa</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-content">
-                <h4>Sosial Media</h4>
-                <ul>
-                    <li><a href="#"><i class='bx bxl-facebook'></i> Facebook</a></li>
-                    <li><a href="#"><i class='bx bx-x'></i> Twitter</a></li>
-                    <li><a href="#"><i class='bx bxl-instagram'></i> Instagram</a></li>
-                    <li><a href="#"><i class='bx bxl-youtube'></i> Youtube</a></li>
-                </ul>
-            </div>
-        </section>
-    </footer>
-</body>
-</html>
+<?php require_once "includes/footer.php"; ?>
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

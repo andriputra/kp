@@ -2,7 +2,16 @@
 	$page_title = "Dashboard";
 	require_once "reuse/header-dashboard.php"; 
 ?>
+<?php
+    if (!isset($_SESSION['user_id'])) {
+        // Jika belum, redirect ke halaman login
+        header("Location: login.php");
+        exit(); // Penting untuk menghentikan eksekusi file setelah redirect
+    }
 
+    // Jika pengguna sudah login, ambil nama pengguna dari sesi
+    $user_name = $_SESSION['username'];
+?>
 <div class="content-area">
     <div class="content-box">
         <div class="content-box-input">

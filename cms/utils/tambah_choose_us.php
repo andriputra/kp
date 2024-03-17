@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Eksekusi statement
         if (mysqli_stmt_execute($stmt)) {
             // choose berhasil ditambahkan, arahkan kembali ke halaman dashboard
-            header("location: ../dashboard.php");
+            header("location: ../index.php");
             exit();
         } else {
             echo "Terjadi kesalahan saat menambahkan choose.";

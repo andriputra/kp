@@ -55,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             
-            // Arahkan ke halaman dashboard.php
-            header("Location: ../dashboard.php");
+            // Arahkan ke halaman index.php
+            header("Location: ../index.php");
             exit();
         } else {
             echo "Sorry, there was an error uploading your file.";

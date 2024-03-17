@@ -2,6 +2,7 @@
 if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -35,8 +36,8 @@ if(session_status() === PHP_SESSION_NONE){
         <aside>
             <a href="#" class="info-brand">Dashboard CMS</a>
             <ul class="side-menu">
-                <li <?php if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') echo 'class="active"'; ?>>
-                    <a href="dashboard.php">Homepage</a>
+                <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>>
+                    <a href="index.php">Homepage</a>
                 </li>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == 'pelatihan.php') echo 'class="active"'; ?>>
                     <a href="pelatihan.php">Pelatihan</a>
@@ -50,11 +51,15 @@ if(session_status() === PHP_SESSION_NONE){
                 <li <?php if(basename($_SERVER['PHP_SELF']) == 'tentang_kami.php') echo 'class="active"'; ?>>
                     <a href="tentang_kami.php">Tentang Kami</a>
                 </li>
+                <li <?php if(basename($_SERVER['PHP_SELF']) == 'contact_us.php') echo 'class="active"'; ?>>
+                    <a href="contact_us.php">Pesan Kontak</a>
+                </li>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == 'footer.php') echo 'class="active"'; ?>>
-                    <a href="footer.php">Footer</a>
+                    <a href="footer.php">Footer Settings</a>
                 </li>
             </ul>
         </aside>
     <?php
         }
     ?>
+    

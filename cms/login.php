@@ -6,7 +6,7 @@
     <div class="auth-page">
         <?php
             if(isset($_SESSION['user_id'])){
-                header("Location: dashboard.php");
+                header("Location: index.php");
             }
 
             require_once "../includes/config.php";
@@ -19,7 +19,7 @@
 
                 $sql = "SELECT id, username, password FROM users WHERE username = ?";
                 
-                if($stmt = $mysqli->prepare($sql)){
+                if($stmt = $koneksi->prepare($sql)){
                     $stmt->bind_param("s", $param_username);
                     
                     $param_username = $username;
@@ -39,7 +39,7 @@
                                     // Set cookie untuk menandai bahwa pengguna telah login
                                     setcookie("loggedIn", true, time() + 3600, "/");
 
-                                    header("location: dashboard.php");
+                                    header("location: index.php");
                                 } else{
                                     $error_message = "Password yang Anda masukkan salah.";
                                 }
@@ -54,7 +54,7 @@
                     $stmt->close();
                 }
                 
-                $mysqli->close();
+                $koneksi->close();
             }
         ?>
         <div class="box-form">

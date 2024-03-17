@@ -17,7 +17,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         // Mencoba untuk mengeksekusi pernyataan persiapan
         if($stmt->execute()){
             // Redirect kembali ke halaman dashboard setelah berhasil menghapus
-            header("location: ../dashboard.php");
+            header("location: ../index.php");
             exit();
         } else{
             echo "Terjadi kesalahan. Silakan coba lagi nanti.";
@@ -31,7 +31,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $koneksi->close();
 } else{
     // Jika ID gambar tidak ditemukan, redirect kembali ke halaman dashboard
-    header("location: ../dashboard.php");
+    header("location: ../index.php");
     exit();
 }
 ?>

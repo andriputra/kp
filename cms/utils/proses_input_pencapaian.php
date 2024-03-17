@@ -12,7 +12,7 @@ if(isset($_POST['pelatihan_sukses'], $_POST['jumlah_peserta'])) {
         $stmt->bind_param("si", $pelatihan_sukses, $jumlah_peserta);
         if($stmt->execute()) {
             // Redirect ke halaman dashboard setelah berhasil memasukkan data
-            header("location: ../dashboard.php");
+            header("location: ../index.php");
             exit();
         } else {
             echo "Gagal menambahkan pencapaian.";

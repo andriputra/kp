@@ -26,16 +26,16 @@ if(isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
         $stmt->close();
 
         // Redirect ke halaman input dengan pesan sukses
-        header("Location: ../dashboard.php?status=success");
+        header("Location: ../index.php?status=success");
         exit();
     } else {
         // Redirect ke halaman input dengan pesan error jika ada masalah saat mengunggah file
-        header("Location: ../dashboard.php?status=error");
+        header("Location: ../index.php?status=error");
         exit();
     }
 } else {
     // Redirect ke halaman input dengan pesan error jika tidak ada file yang diunggah
-    header("Location: ../dashboard.php?status=error");
+    header("Location: ../index.php?status=error");
     exit();
 }
 ?>

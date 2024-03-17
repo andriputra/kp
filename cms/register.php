@@ -56,7 +56,7 @@
                 if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
                     $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
                     
-                    if($stmt = $mysqli->prepare($sql)){
+                    if($stmt = $koneksi->prepare($sql)){
                         $stmt->bind_param("ss", $param_username, $param_password);
                         
                         $param_username = $username;
@@ -72,7 +72,7 @@
                     }
                 }
                 
-                $mysqli->close();
+                $koneksi->close();
             }
         ?>
         <div class="box-form">

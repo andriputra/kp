@@ -301,6 +301,7 @@ aside ul li.active a{
     padding: 9px;
     border-radius: 3px;
     color: #ffffff;
+    height: auto;
 }
 .content-area .content-box .content-box-preview-item form .btn.delete i,
 .content-area .content-box .content-box-preview ul li form .btn.delete i{
@@ -334,4 +335,51 @@ aside ul li.active a{
 .content-area .content-box .content-box-preview ul li form{
     padding: 0px;
     margin-bottom: 0px;
+}
+.content-area .content-box .content-box-input .preview-image{
+    padding: 20px 20px 0px;
+}
+.content-area .content-box .content-box-input .preview-image p.name{
+    margin-bottom: 0px;
+    color: #a1a3ff;
+}
+.content-area .content-box .content-box-input hr{
+    border-color: white;
+    opacity: 0.2;
+}
+.content-area .content-box .content-box-input table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.content-area .content-box .content-box-input table thead tr th{
+    border-bottom: 1px solid #c1c1c1;
+    padding: 10px;
+}
+.content-area .content-box .content-box-input table thead tr th:nth-child(4){
+    width: 35%;
+}
+.content-area .content-box .content-box-input table tbody tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+.content-area .content-box .content-box-input table tbody tr td{
+    padding: 10px;
+    vertical-align: text-top;
+}
+.content-area .content-box .content-box-input table tbody tr td:first-child{
+    text-align: center;
+}
+
+.content-area .content-box .content-box-input .pagination{
+    padding: 20px 20px 0px;
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 20px;
+    border-top: 1px solid #c1c1c1;
+}
+.content-area .content-box .content-box-input .pagination a{
+    text-decoration: none;
+    font-size: 20px;
+}
+.content-area .content-box .content-box-input .pagination a.active{
+    font-weight: 600;
 }
