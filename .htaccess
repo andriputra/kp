@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Cek apakah pengguna belum login dan coba mengakses /cms/
+RewriteCond %{REQUEST_URI} ^/cms/$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{HTTP_COOKIE} !loggedIn=true
+RewriteRule ^ /cms/login.php [L]
+
+# Cek apakah pengguna belum login dan coba mengakses /cms/ (jika ingin diarahkan ke register.php)
+# RewriteCond %{REQUEST_URI} ^/cms/$
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{HTTP_COOKIE} !loggedIn=true
+# RewriteRule ^ /cms/register.php [L]
