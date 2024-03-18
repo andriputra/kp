@@ -76,3 +76,6 @@ if ($result && $result->num_rows > 0) {
         </div>
     </div>
 </div>
+<?php 
+require_once "reuse/footer-dashboard.php"; 
+?>

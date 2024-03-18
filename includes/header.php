@@ -20,7 +20,7 @@
             <li <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') echo 'class="active"'; ?>><a href="index.php">Beranda</a></li>
             <li <?php if(basename($_SERVER['PHP_SELF']) == 'pelatihan.php') echo 'class="active"'; ?>><a href="pelatihan.php">Kejuruan Pelatihan</a></li>
             <li <?php if(basename($_SERVER['PHP_SELF']) == 'tentang-kami.php') echo 'class="active"'; ?>><a href="tentang-kami.php">Tentang Kami</a></li>
-            <li <?php if(basename($_SERVER['PHP_SELF']) == 'berita.php') echo 'class="active"'; ?>><a href="berita.php">Berita</a></li>
+            <li <?php if(basename($_SERVER['PHP_SELF']) == 'berita.php' || basename($_SERVER['PHP_SELF']) == 'berita-detail.php') echo 'class="active"'; ?>><a href="berita.php">Berita</a></li>
 			</ul>
 		</nav>
 		<a class="cta" href="index.php"><button>Daftar</button></a>
