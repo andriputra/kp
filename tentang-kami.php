@@ -32,37 +32,43 @@ $row = mysqli_fetch_assoc($result);
                 <?php endif; ?>
             </div>
         </div>
-        <h1>Alamat BPVP Sidoarjo</h1>
-        <div class="kami-content">
-            <div class="address">
-                <i class="fa-solid fa-location-dot"></i>
-                <span><strong>BPVP SIDOARJO</strong> <?php echo $row['address']; ?></span>
+        <div class="info-contact">
+            <div class="info-contact-box">
+                <h1>Alamat BPVP Sidoarjo</h1>
+                <div class="kami-content address">
+                    <?php echo $row['map_embed']; ?>
+                    <div class="address">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span><strong>BPVP SIDOARJO</strong> <?php echo $row['address']; ?></span>
+                    </div>            
+                </div>
             </div>
-            <?php echo $row['map_embed']; ?>
-        </div>
-        <h1>Contact Us</h1>
-        <div class="contact-us">
-            <form class="area-one" action="cms/utils/proses_input_contact_us.php" method="POST">
-                <div class="form-action">
-                    <label for="name">Name:</label>
-                    <input class="input-action" type="text" name="name" id="name" value="" require>
+            <div class="info-contact-box">
+                <h1>Contact Us</h1>
+                <div class="contact-us">
+                    <form class="area-one" action="cms/utils/proses_input_contact_us.php" method="POST">
+                        <div class="form-action">
+                            <label for="name">Name:</label>
+                            <input class="input-action" type="text" name="name" id="name" value="" require>
+                        </div>
+                        <div class="form-action">
+                            <label for="email">Email:</label>
+                            <input class="input-action" type="email" name="email" id="email" value="" require>
+                        </div>
+                        <div class="form-action">
+                            <label for="message">Message:</label>
+                            <textarea class="input-action" name="message" id="message" value="" row=4></textarea>
+                        </div>
+                        <button type="submit" class="btn add">Kirim</button>
+                    </form>
+                    <?php
+                    // Menampilkan pesan sukses jika ada
+                    if (isset($_GET['status']) && $_GET['status'] === 'success') {
+                        echo '<p class="success-message">Pesan berhasil dikirim!</p>';
+                    }
+                    ?>
                 </div>
-                <div class="form-action">
-                    <label for="email">Email:</label>
-                    <input class="input-action" type="email" name="email" id="email" value="" require>
-                </div>
-                <div class="form-action">
-                    <label for="message">Message:</label>
-                    <textarea class="input-action" name="message" id="message" value="" row=4></textarea>
-                </div>
-                <button type="submit" class="btn add">Kirim</button>
-            </form>
-            <?php
-            // Menampilkan pesan sukses jika ada
-            if (isset($_GET['status']) && $_GET['status'] === 'success') {
-                echo '<p class="success-message">Pesan berhasil dikirim!</p>';
-            }
-            ?>
+            </div>  
         </div>
     </div>
 </section>

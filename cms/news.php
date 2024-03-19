@@ -2,48 +2,13 @@
 $page_title = "News Dashboard";
 require_once "reuse/header-dashboard.php"; 
 require_once "../includes/config.php";
-
-// Proses form pengelolaan konten
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil data dari formulir
-    $judul = $_POST["judul"];
-    $description = $_POST["description"];
-    $excerpt = $_POST["excerpt"];
-    $tanggal_post = $_POST["tanggal_post"];
-    $kategori = $_POST["kategori"];
-    $gambar = $_FILES["gambar"];
-
-    // Proses upload gambar
-    $gambar_name = $gambar["name"];
-    $gambar_tmp = $gambar["tmp_name"];
-    $gambar_destination = "../../assets/img/" . $gambar_name;
-
-    // Pindahkan file gambar dari temporary location ke lokasi yang ditentukan
-    move_uploaded_file($gambar_tmp, $gambar_destination);
-
-    // Query untuk menyimpan data berita ke dalam database
-    $query = "INSERT INTO berita (judul, description, excerpt, tanggal_post, kategori, gambar) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $koneksi->prepare($query);
-    $stmt->bind_param("ssssss", $judul, $description, $excerpt, $tanggal_post, $kategori, $gambar_name);
-
-    // Eksekusi query
-    if ($stmt->execute()) {
-        // Jika berhasil, redirect ke halaman manajemen konten dengan pesan sukses
-        header("Location: news.php?status=success");
-        exit();
-    } else {
-        // Jika terjadi error saat eksekusi query
-        header("Location: news.php?status=failed");
-        exit();
-    }
-}
 ?>
 
 <div class="content-area">
     <div class="content-box">
         <div class="content-box-input">
             <h2 class="content-dashboard-title">News Settings</h2>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+            <form action="utils/proses_tambah_news.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="judul">Judul:</label>
                     <input type="text" name="judul" id="judul" required>

@@ -39,7 +39,6 @@
                 <label for="logo">Logo:</label>
                 <?php if(isset($row_footer_settings['logo']) && !empty($row_footer_settings['logo'])): ?>
                     <img src="<?php echo str_replace('../../', '../', $row_footer_settings['logo']); ?>" alt="Logo Preview" style="max-width: 200px;">
-                    
                 <?php endif; ?>
                 <input type="file" name="logo" id="logo">
                 

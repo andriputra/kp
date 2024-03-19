@@ -3,10 +3,7 @@
         <section class="footer">
             <div class="footer-content">
                 <?php
-                // Ambil dan tampilkan logo dari database
-                // Misalnya, jika logo disimpan dalam tabel 'footer_settings'
-                // dengan kolom 'logo'
-                $query_logo = "SELECT logo FROM footer_settings";
+                $query_logo = "SELECT logo FROM footer_settings ORDER BY id DESC LIMIT 1";
                 $result_logo = mysqli_query($koneksi, $query_logo);
                 $row_logo = mysqli_fetch_assoc($result_logo);
                 ?>
@@ -16,10 +13,7 @@
 
             <div class="footer-content">
                 <?php
-                // Ambil dan tampilkan teks deskripsi dari database
-                // Misalnya, jika teks disimpan dalam tabel 'footer_settings'
-                // dengan kolom 'description'
-                $query_description = "SELECT description FROM footer_settings";
+                $query_description = "SELECT description FROM footer_settings ORDER BY id DESC LIMIT 1";
                 $result_description = mysqli_query($koneksi, $query_description);
                 $row_description = mysqli_fetch_assoc($result_description);
                 ?>
@@ -30,10 +24,7 @@
                 <h4>Contact</h4>
                 <ul>
                     <?php
-                    // Ambil dan tampilkan informasi kontak dari database
-                    // Misalnya, jika informasi kontak disimpan dalam tabel 'footer_contact'
-                    // dengan kolom 'email', 'address', 'phone', 'whatsapp'
-                    $query_contact = "SELECT email, address, phone, whatsapp FROM footer_contact";
+                    $query_contact = "SELECT email, address, phone, whatsapp FROM footer_contact ORDER BY id DESC LIMIT 1";
                     $result_contact = mysqli_query($koneksi, $query_contact);
                     $row_contact = mysqli_fetch_assoc($result_contact);
                     ?>
@@ -48,10 +39,7 @@
                 <h4>Sosial Media</h4>
                 <ul>
                     <?php
-                    // Ambil dan tampilkan tautan media sosial dari database
-                    // Misalnya, jika tautan disimpan dalam tabel 'social_media'
-                    // dengan kolom 'facebook', 'twitter', 'instagram', 'youtube'
-                    $query_social_media = "SELECT facebook, twitter, instagram, youtube FROM social_media";
+                    $query_social_media = "SELECT facebook, twitter, instagram, youtube FROM social_media ORDER BY id DESC LIMIT 1";
                     $result_social_media = mysqli_query($koneksi, $query_social_media);
                     $row_social_media = mysqli_fetch_assoc($result_social_media);
                     ?>

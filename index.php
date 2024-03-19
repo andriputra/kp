@@ -4,44 +4,31 @@
 ?>
 
 <main>
-    <section id="sc">
+    <section>
         <div class="slider-wrapper">
             <div class="slider">
-                <?php
-                // Koneksi ke database
-                require_once "includes/config.php";
+				<div class="main-slider owl-carousel owl-theme">
+					<?php
+					// Koneksi ke database
+					require_once "includes/config.php";
 
-                // Query untuk mengambil informasi gambar-gambar dari database
-                $query = "SELECT * FROM gambar_slider";
-                $result = mysqli_query($koneksi, $query);
+					// Query untuk mengambil informasi gambar-gambar dari database
+					$query = "SELECT * FROM gambar_slider";
+					$result = mysqli_query($koneksi, $query);
 
-                // Loop untuk menampilkan setiap gambar
-                if ($result) {
-					while ($row = mysqli_fetch_assoc($result)) {
-						$path = str_replace("../../assets/img", "assets/img", $row['path']);
-						?>
-						<div id="slide-<?php echo $row['id']; ?>">
-							<img src="<?php echo $path; ?>" alt="<?php echo $row['deskripsi']; ?>">
-						</div>
-						<?php
+					// Loop untuk menampilkan setiap gambar
+					if ($result) {
+						while ($row = mysqli_fetch_assoc($result)) {
+							$path = str_replace("../../assets/img", "assets/img", $row['path']);
+							?>
+								<img src="<?php echo $path; ?>" alt="<?php echo $row['deskripsi']; ?>">
+							<?php
+						}
+					} else {
+						echo "Error: " . mysqli_error($koneksi);
 					}
-				} else {
-					echo "Error: " . mysqli_error($koneksi);
-				}
-                ?>
-            </div>
-            <div class="slider-nav">
-                <?php
-                // Mengulang untuk membuat navigasi
-                if ($result) {
-                    mysqli_data_seek($result, 0);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                        <a href="#slide-<?php echo $row['id']; ?>"></a>
-                        <?php
-                    }
-                }
-                ?>
+					?>
+				</div>
             </div>
         </div>
     </section>
@@ -140,6 +127,22 @@
 				$query_choose = "SELECT * FROM memilih_kami";
 				$result_choose = mysqli_query($koneksi, $query_choose);
 				?>
+				<?php
+				// Ambil kembali hasil query untuk mengambil gambar
+				$result_choose = mysqli_query($koneksi, $query_choose);
+
+				// Periksa apakah query berhasil dieksekusi
+				if ($result_choose) {
+					// Ambil baris pertama (karena gambar dianggap sama untuk setiap choose)
+					$row_choose = mysqli_fetch_assoc($result_choose);
+					?>
+					<img id="sertifikat" src="assets/img/<?php echo $row_choose['gambar']; ?>" alt="<?php echo $row_choose['nama_choose']; ?>">
+					<?php
+				} else {
+					// Tampilkan pesan error jika query gagal dieksekusi
+					echo "Error: " . mysqli_error($koneksi);
+				}
+				?>
 				<ul id="un">
 					<?php
 					// Periksa apakah query berhasil dieksekusi
@@ -158,22 +161,6 @@
 					}
 					?>
 				</ul>
-				<?php
-				// Ambil kembali hasil query untuk mengambil gambar
-				$result_choose = mysqli_query($koneksi, $query_choose);
-
-				// Periksa apakah query berhasil dieksekusi
-				if ($result_choose) {
-					// Ambil baris pertama (karena gambar dianggap sama untuk setiap choose)
-					$row_choose = mysqli_fetch_assoc($result_choose);
-					?>
-					<img id="sertifikat" src="assets/img/<?php echo $row_choose['gambar']; ?>" alt="<?php echo $row_choose['nama_choose']; ?>">
-					<?php
-				} else {
-					// Tampilkan pesan error jika query gagal dieksekusi
-					echo "Error: " . mysqli_error($koneksi);
-				}
-				?>
 			</div>
 		</div>
 	</section>
@@ -181,7 +168,7 @@
 	<section id="sc">
 		<h1>Mitra Kerja</h1>
 		<div class="mitra-container">
-			<div class="slide-track">
+			<div class="owl-mitra owl-carousel owl-theme">
 				<?php
 					// Koneksi ke database
 					require_once "includes/config.php";
@@ -195,9 +182,7 @@
 						while ($row = mysqli_fetch_assoc($result_mitra)) {
 							$path = str_replace("../../assets/img", "assets/img", $row['path']);
 							?>
-							<div class="slide">
-								<img id="img-mitra" src="<?php echo $path; ?>" alt="<?php echo $row['deskripsi']; ?>">
-							</div>
+							<img src="<?php echo $path; ?>" alt="<?php echo $row['deskripsi']; ?>">
 							<?php
 						}
 					} else {
@@ -208,8 +193,29 @@
 		</div>
 	</section>
 </main>
-
+<script>
+	jQuery(document).ready(function($) {
+		$('.main-slider').owlCarousel({
+			center: true,
+			items: 2,
+			loop: true,
+			margin: 10,
+			autoplay: true,
+			autoplayTimeout: 5000,
+			autoplayHoverPause: true
+		});
+		$('.owl-mitra').owlCarousel({
+			items:5,
+			loop:true,
+			margin:10,
+			toplay: true,
+			autoplayTimeout: 5000,
+			autoplayHoverPause: true
+		});
+	});
+</script>
 <?php require_once "includes/footer.php"; ?>
+
 <?php
 	// Tutup koneksi database
 mysqli_close($koneksi);

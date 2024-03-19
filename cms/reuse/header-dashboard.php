@@ -49,6 +49,9 @@ if(session_status() === PHP_SESSION_NONE){
                 <li <?php if(basename($_SERVER['PHP_SELF']) == 'kelas.php') echo 'class="active"'; ?>>
                     <a href="kelas.php">Kelas</a>
                 </li>
+                <li <?php if(basename($_SERVER['PHP_SELF']) == 'testimonial.php') echo 'class="active"'; ?>>
+                    <a href="testimonial.php">Testimonial</a>
+                </li>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == 'tentang_kami.php') echo 'class="active"'; ?>>
                     <a href="tentang_kami.php">Tentang Kami</a>
                 </li>
