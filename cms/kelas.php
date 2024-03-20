@@ -96,7 +96,7 @@
                                 <td><?php echo substr($row['info'], 0, 150); ?></td>
                                 <td><?php echo $row['judul_pelatihan']; ?></td>
                                 <td>
-                                    <!-- <a href="edit_kelas.php?id=<?php echo $row['id']; ?>" class="btn"><i class='fa-solid fa-pen'></i></a> |  -->
+                                    <a href="edit_kelas.php?id=<?php echo $row['id']; ?>" class="btn"><i class='fa-solid fa-pen'></i></a> | 
                                     <a href="?delete_id=<?php echo $row['id']; ?>" class="btn delete" onclick="return confirm('Apakah Anda yakin ingin menghapus kelas ini?')"><i class='fa-regular fa-trash-can'></i></a>
                                 </td>
                             </tr>

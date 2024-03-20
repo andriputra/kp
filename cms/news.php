@@ -44,6 +44,7 @@ require_once "../includes/config.php";
                 <table class="table list-news">
                     <thead>
                         <tr>
+                            <th>Gambar</th> 
                             <th>Judul</th>
                             <th>Deskripsi</th>
                             <th>Waktu Posting</th>
@@ -66,10 +67,11 @@ require_once "../includes/config.php";
                         // Mengatur panjang deskripsi maksimal menjadi 100 karakter
                         $description = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
                         echo "<tr>";
+                        echo "<td><img src='../assets/img/{$row['gambar']}' alt='Preview Gambar' style='max-width: 100px;'></td>";
                         echo "<td>{$row['judul']}</td>";
                         echo "<td>{$description}</td>";
                         echo "<td>{$row['tanggal_post']}</td>";
-                        echo "<td><a href='edit_news.php?id={$row['id']}'><i class='fa-solid fa-pen'></i></a> | <a href='hapus_berita.php?id={$row['id']}'><i class='fa-regular fa-trash-can'></i></a></td>";
+                        echo "<td width='4%'><a href='edit_news.php?id={$row['id']}'><i class='fa-solid fa-pen'></i></a> | <a href='utils/proses_hapus_berita.php?id={$row['id']}'><i class='fa-regular fa-trash-can'></i></a></td>";
                         echo "</tr>";
                     }
                     ?>
@@ -80,4 +82,3 @@ require_once "../includes/config.php";
     </div>
 </div>
 <?php require_once "reuse/footer-dashboard.php"; ?>
-

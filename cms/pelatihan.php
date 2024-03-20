@@ -1,11 +1,7 @@
-<?php 
+<?php
 $page_title = "Pelatihan Dashboard";
-require_once "reuse/header-dashboard.php"; 
+require_once "reuse/header-dashboard.php";
 require_once "../includes/config.php";
-
-// Query untuk mengambil data kelas dari database
-$query_kelas = "SELECT * FROM kelas";
-$result_kelas = mysqli_query($koneksi, $query_kelas);
 
 // Pastikan pengguna telah login
 if (!isset($_SESSION['user_id'])) {
@@ -15,6 +11,8 @@ if (!isset($_SESSION['user_id'])) {
 
 // Jika pengguna sudah login, ambil nama pengguna dari sesi
 $user_name = $_SESSION['username'];
+
+$pelatihan_edit = array(); // inisialisasi array untuk menyimpan data pelatihan yang akan diedit
 
 // Proses penghapusan pelatihan jika parameter delete_id diterima
 if (isset($_GET['delete_id'])) {
@@ -29,31 +27,6 @@ if (isset($_GET['delete_id'])) {
         header("Location: pelatihan.php?status=error");
         exit();
     }
-}
-
-// Inisialisasi variabel untuk menyimpan data pelatihan yang akan diedit
-$pelatihan_edit = [];
-
-// Jika terdapat parameter edit_id, berarti dalam mode edit
-if(isset($_GET['edit_id'])){
-    // Ambil ID pelatihan yang akan diedit
-    $edit_id = $_GET['edit_id'];
-
-    // Ambil data pelatihan berdasarkan ID yang akan diedit
-    $query_edit = "SELECT * FROM pelatihan WHERE id = ?";
-    $stmt_edit = $koneksi->prepare($query_edit);
-    $stmt_edit->bind_param("i", $edit_id);
-    $stmt_edit->execute();
-    $result_edit = $stmt_edit->get_result();
-
-    // Pastikan pelatihan dengan ID yang diberikan ada dalam database
-    if ($result_edit->num_rows == 0) {
-        header("Location: pelatihan.php?status=not_found");
-        exit();
-    }
-
-    // Ambil data pelatihan yang akan diedit
-    $pelatihan_edit = $result_edit->fetch_assoc();
 }
 
 // Proses pengiriman formulir tambah/edit pelatihan
@@ -105,6 +78,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Ambil data pelatihan dari database
 $query = "SELECT * FROM pelatihan ORDER BY id DESC";
 $result = mysqli_query($koneksi, $query);
+
+// Jika dalam mode edit, ambil data pelatihan yang akan diedit
+if(isset($_GET['edit_id'])){
+    $edit_id = $_GET['edit_id'];
+    $query_edit = "SELECT * FROM pelatihan WHERE id=?";
+    $stmt_edit = $koneksi->prepare($query_edit);
+    $stmt_edit->bind_param("i", $edit_id);
+    $stmt_edit->execute();
+    $result_edit = $stmt_edit->get_result();
+    $pelatihan_edit = $result_edit->fetch_assoc();
+}
 ?>
 
 <div class="content-area">
@@ -130,6 +114,13 @@ $result = mysqli_query($koneksi, $query);
                     <input type="file" name="gambar" id="gambar" accept="image/*">
                 </div>
                 <button type="submit" class="btn add"><?php echo isset($_GET['edit_id']) ? 'Edit Pelatihan' : 'Tambah Pelatihan'; ?></button>
+                <?php if(isset($_GET['edit_id'])): ?>
+                    <!-- Form tersembunyi untuk penanganan penghapusan -->
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" style="display: inline;">
+                        <input type="hidden" name="delete_id" value="<?php echo $pelatihan_edit['id']; ?>">
+                        <button type="submit" class="btn delete" onclick="return confirm('Apakah Anda yakin ingin menghapus pelatihan ini?')">Hapus</button>
+                    </form>
+                <?php endif; ?>
             </form>
             <hr>
             <!-- Daftar Pelatihan -->

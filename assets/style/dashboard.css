@@ -398,13 +398,17 @@ aside ul li.active a{
 }
 .content-area .content-box .content-box-input .box-table .list-news tr th:nth-child(4),
 .content-area .content-box .content-box-input .box-table .pelatihan-list tr th:nth-child(5){
-    width: 10%;
-    text-align: right;
+    /* width: 10%;
+    text-align: right; */
 }
 .content-area .content-box .content-box-input .box-table .pelatihan-list tr th:nth-child(4){
     width: auto;
 }
 .content-area .content-box .content-box-input .box-table .list-news tbody tr td:last-child,
 .content-area .content-box .content-box-input .box-table .pelatihan-list tbody tr td:last-child{
+    text-align: right;
+}
+.content-area .content-box .content-box-input .box-table .pelatihan-list tr th:last-child{
+    width: 6%;
     text-align: right;
 }
