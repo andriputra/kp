@@ -20,11 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     // Redirect ke halaman terima kasih atau halaman lain yang sesuai
-    header("Location: ../contact_us.php?status=success");
+    header("Location: ../../tentang-kami.php?status=successTerkirim");
     exit();
 } else {
     // Redirect jika bukan metode POST
-    header("Location: ../contact_us.php?status=error");
+    header("Location: ../../tentang-kami.php?status=successTerkirim");
     exit();
 }
 ?>

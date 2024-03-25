@@ -84,7 +84,7 @@ if(isset($_GET['edit_id'])){
     $edit_id = $_GET['edit_id'];
     $query_edit = "SELECT * FROM pelatihan WHERE id=?";
     $stmt_edit = $koneksi->prepare($query_edit);
-    $stmt_edit->bind_param("i", $edit_id);
+    $stmt_edit->bind_param("i", $_GET['edit_id']);
     $stmt_edit->execute();
     $result_edit = $stmt_edit->get_result();
     $pelatihan_edit = $result_edit->fetch_assoc();
@@ -103,7 +103,7 @@ if(isset($_GET['edit_id'])){
                 </div>
                 <div class="form-group">
                     <label for="description">Keterangan Pelatihan:</label>
-                    <textarea name="description" id="description" rows="6"><?php echo isset($pelatihan_edit['description']) ? $pelatihan_edit['description'] : ''; ?></textarea>
+                    <textarea name="description" id="description" rows="6" required><?php echo isset($pelatihan_edit['description']) ? $pelatihan_edit['description'] : ''; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="waktu_post">Waktu Post:</label>
@@ -111,17 +111,22 @@ if(isset($_GET['edit_id'])){
                 </div>
                 <div class="form-group">
                     <label for="gambar">Gambar:</label>
-                    <input type="file" name="gambar" id="gambar" accept="image/*">
+                    <input type="file" name="gambar" id="gambar">
+                    <?php if(isset($pelatihan_edit['gambar'])): ?>
+                        <!-- Tampilkan gambar yang sudah ada -->
+                        <img src="<?php echo $pelatihan_edit['gambar']; ?>" alt="Gambar Pelatihan" style="max-width: 100px;">
+                    <?php endif; ?>
                 </div>
-                <button type="submit" class="btn add"><?php echo isset($_GET['edit_id']) ? 'Edit Pelatihan' : 'Tambah Pelatihan'; ?></button>
+                <button type="submit" class="btn add <?php echo isset($_GET['edit_id']) ?>"><?php echo isset($_GET['edit_id']) ? 'Edit Pelatihan' : 'Tambah Pelatihan'; ?></button>
                 <?php if(isset($_GET['edit_id'])): ?>
-                    <!-- Form tersembunyi untuk penanganan penghapusan -->
+                    <!-- Form tersembunyi untuk penanganan penghapusan -->  
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" style="display: inline;">
                         <input type="hidden" name="delete_id" value="<?php echo $pelatihan_edit['id']; ?>">
                         <button type="submit" class="btn delete" onclick="return confirm('Apakah Anda yakin ingin menghapus pelatihan ini?')">Hapus</button>
                     </form>
                 <?php endif; ?>
             </form>
+
             <hr>
             <!-- Daftar Pelatihan -->
             <div class="box-table">
@@ -141,7 +146,7 @@ if(isset($_GET['edit_id'])){
                                 <td><img src="<?php echo $row['gambar']; ?>" alt="Gambar Pelatihan" style="max-width: 100px;"></td>
                                 <td><?php echo substr($row['description'], 0, 150); ?></td>
                                 <td>
-                                    <a href="?edit_id=<?php echo $row['id']; ?>" class="btn"><i class='fa-solid fa-pen'></i></a> | 
+                                    <a href='edit_pelatihan.php?id=<?php echo $row['id']; ?>'><i class='fa-solid fa-pen'></i></a> | 
                                     <a href="?delete_id=<?php echo $row['id']; ?>" class="btn delete" onclick="return confirm('Apakah Anda yakin ingin menghapus pelatihan ini?')"><i class='fa-regular fa-trash-can'></i></a>
                                 </td>
                             </tr>

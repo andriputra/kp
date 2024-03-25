@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Batasi ukuran file
-    if ($_FILES["gambar"]["size"] > 500000) {
+    if ($_FILES["gambar"]["size"] > 5000000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
@@ -48,13 +48,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
             echo "The file " . htmlspecialchars(basename($_FILES["gambar"]["name"])) . " has been uploaded.";
-            // Simpan informasi gambar ke database
-            $query = "INSERT INTO fasilitas_pelatihan (nama_fasilitas, gambar) VALUES (?, ?)";
-            $stmt = mysqli_prepare($koneksi, $query);
-            mysqli_stmt_bind_param($stmt, "ss", $_POST['nama_fasilitas'], $_FILES["gambar"]["name"]);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-            
+
+            // Memeriksa apakah gambar sudah ada di dalam database
+            $query_check = "SELECT COUNT(*) as total FROM memilih_kami_gambar";
+            $result_check = mysqli_query($koneksi, $query_check);
+            $row_check = mysqli_fetch_assoc($result_check);
+            $total_images = $row_check['total'];
+
+            if ($total_images > 0) {
+                // Jika sudah ada, jalankan fungsi update
+                $query_update = "UPDATE memilih_kami_gambar SET image_name = ? LIMIT 1";
+                $stmt_update = mysqli_prepare($koneksi, $query_update);
+                if ($stmt_update) {
+                    mysqli_stmt_bind_param($stmt_update, "s", $_FILES["gambar"]["name"]);
+                    mysqli_stmt_execute($stmt_update);
+                    mysqli_stmt_close($stmt_update);
+                } else {
+                    echo "Error updating record: " . mysqli_error($koneksi);
+                }
+            } else {
+                // Jika belum ada, jalankan fungsi insert
+                $query_insert = "INSERT INTO memilih_kami_gambar (image_name) VALUES (?)";
+                $stmt_insert = mysqli_prepare($koneksi, $query_insert);
+                if ($stmt_insert) {
+                    mysqli_stmt_bind_param($stmt_insert, "s", $_FILES["gambar"]["name"]);
+                    mysqli_stmt_execute($stmt_insert);
+                    mysqli_stmt_close($stmt_insert);
+                } else {
+                    echo "Error inserting record: " . mysqli_error($koneksi);
+                }
+            }
+
             // Arahkan ke halaman index.php
             header("Location: ../index.php");
             exit();

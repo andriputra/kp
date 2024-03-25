@@ -79,6 +79,8 @@
 
 				// Query untuk mengambil daftar fasilitas pelatihan
 				$query_fasilitas = "SELECT * FROM fasilitas_pelatihan";
+				$query_fasilitas_image = "SELECT image_name FROM fasilitas_pelatihan_image";
+
 				$result_fasilitas = mysqli_query($koneksi, $query_fasilitas);
 				?>
 				<ul id="un">
@@ -98,16 +100,16 @@
 					}
 					?>
 				</ul>
+				
 				<?php
-				// Ambil kembali hasil query untuk mengambil gambar
-				$result_fasilitas = mysqli_query($koneksi, $query_fasilitas);
+				$result_fasilitas_image = mysqli_query($koneksi, $query_fasilitas_image);
 
 				// Periksa apakah query berhasil dieksekusi
-				if ($result_fasilitas) {
+				if ($result_fasilitas_image) {
 					// Ambil baris pertama (karena gambar dianggap sama untuk setiap fasilitas)
-					$row_fasilitas = mysqli_fetch_assoc($result_fasilitas);
+					$row_fasilitas_image = mysqli_fetch_assoc($result_fasilitas_image);
 					?>
-					<img id="img-fasilitas" src="assets/img/<?php echo $row_fasilitas['gambar']; ?>" alt="<?php echo $row_fasilitas['nama_fasilitas']; ?>">
+					<img id="img-fasilitas" src="assets/img/<?php echo $row_fasilitas_image['image_name']; ?>" alt="image-pelatihan">
 					<?php
 				} else {
 					// Tampilkan pesan error jika query gagal dieksekusi
@@ -125,18 +127,20 @@
 				<?php
 				// Query untuk mengambil daftar memilih kami
 				$query_choose = "SELECT * FROM memilih_kami";
+				$query_choose_us_image = "SELECT image_name FROM memilih_kami_gambar";
+
 				$result_choose = mysqli_query($koneksi, $query_choose);
 				?>
+
 				<?php
-				// Ambil kembali hasil query untuk mengambil gambar
-				$result_choose = mysqli_query($koneksi, $query_choose);
+				$result_choose_us_image = mysqli_query($koneksi, $query_choose_us_image);
 
 				// Periksa apakah query berhasil dieksekusi
-				if ($result_choose) {
-					// Ambil baris pertama (karena gambar dianggap sama untuk setiap choose)
-					$row_choose = mysqli_fetch_assoc($result_choose);
+				if ($result_choose_us_image) {
+					// Ambil baris pertama (karena gambar dianggap sama untuk setiap fasilitas)
+					$row_fasilitas_image = mysqli_fetch_assoc($result_choose_us_image);
 					?>
-					<img id="sertifikat" src="assets/img/<?php echo $row_choose['gambar']; ?>" alt="<?php echo $row_choose['nama_choose']; ?>">
+					<img id="img-fasilitas" src="assets/img/<?php echo $row_fasilitas_image['image_name']; ?>" alt="<?php echo $row_fasilitas_image['image_name']; ?>">
 					<?php
 				} else {
 					// Tampilkan pesan error jika query gagal dieksekusi

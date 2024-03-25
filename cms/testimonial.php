@@ -34,7 +34,7 @@
         <div class="content-box-input">
             <h2 class="content-dashboard-title">Editor Testimonial</h2>
             <!-- Form untuk mengunggah testimonial -->
-            <form action="utils/proses_upload_testimonial.php" method="POST" enctype="multipart/form-data">
+            <form action="utils/proses_tambah_testimonial.php" method="POST" enctype="multipart/form-data">
                 <!-- Tambahkan input untuk data testimonial -->
                 <div class="form-group">
                     <label for="nama">Nama:</label>
@@ -57,8 +57,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th style="width:10%">Nama</th>
                             <th>Testimoni</th>
+                            <th style="width:4%">action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,6 +70,10 @@
                                 <td><?php echo $nomor++; ?></td>
                                 <td><?php echo $row['nama']; ?></td>
                                 <td><?php echo $row['testimoni']; ?></td>
+                                <td width='4%'>
+                                    <a href='edit_testimonial.php?id=<?php echo $row['id']; ?>'><i class='fa-solid fa-pen'></i></a> | 
+                                    <a href='utils/proses_hapus_testimonial.php?id=<?php echo $row['id']; ?>' onclick="return confirm('Apakah Anda yakin ingin menghapus Testimonial ini?')"><i class='fa-regular fa-trash-can'></i></a>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
@@ -78,16 +83,12 @@
             <!-- Tampilkan navigasi halaman -->
             <div class="pagination">
                 <?php 
-                // Tampilkan tautan ke halaman sebelumnya jika bukan halaman pertama
                 if ($halaman > 1) {
                     echo '<a href="?page='.($halaman - 1).'" class="page-link">&laquo; Sebelumnya</a>';
                 }
-
-                // Tampilkan tautan ke halaman selanjutnya jika bukan halaman terakhir
                 for ($i = 1; $i <= $jumlah_halaman; $i++) {
                     echo '<a href="?page='.$i.'" class="page-link '.($i == $halaman ? 'active' : '').'">'.$i.'</a>';
                 }
-
                 if ($halaman < $jumlah_halaman) {
                     echo '<a href="?page='.($halaman + 1).'" class="page-link">Selanjutnya &raquo;</a>';
                 }

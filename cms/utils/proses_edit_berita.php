@@ -9,11 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['berita_id'])) {
     $tanggal_post = $_POST['tanggal_post'];
     $kategori = $_POST['kategori'];
 
-    // Prepare statement
-    $stmt = mysqli_prepare($koneksi, "UPDATE berita SET judul=?, description=?, excerpt=?, tanggal_post=?, kategori=? WHERE id=?");
+    // Waktu saat ini
+    $current_time = date('Y-m-d H:i:s');
+
+    // Prepare statement untuk update berita
+    $stmt = mysqli_prepare($koneksi, "UPDATE berita SET judul=?, description=?, excerpt=?, tanggal_post=?, kategori=?, updated_at=? WHERE id=?");
 
     // Bind parameter
-    mysqli_stmt_bind_param($stmt, "sssssi", $judul, $description, $excerpt, $tanggal_post, $kategori, $berita_id);
+    mysqli_stmt_bind_param($stmt, "ssssssi", $judul, $description, $excerpt, $tanggal_post, $kategori, $current_time, $berita_id);
 
     // Execute statement
     $result = mysqli_stmt_execute($stmt);

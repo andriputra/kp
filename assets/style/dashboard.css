@@ -320,6 +320,15 @@ aside ul li.active a{
 .content-area .content-box .content-section.facility form{
     flex: auto;
 }
+.content-area .content-box .content-box-preview.other{
+    display: flex;
+    justify-content: space-between;
+}
+.content-area .content-box .content-box-preview.content-box-preview.other .content-box-preview-item{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
 .content-area .content-box .content-box-preview ul{
     margin-bottom: 0px;
     margin-top: 0px;
@@ -411,4 +420,7 @@ aside ul li.active a{
 .content-area .content-box .content-box-input .box-table .pelatihan-list tr th:last-child{
     width: 6%;
     text-align: right;
+}
+.preview-box-about{
+    display: flex;
 }

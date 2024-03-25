@@ -20,10 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Pindahkan file gambar dari temporary location ke lokasi yang ditentukan
     move_uploaded_file($gambar_tmp, $gambar_destination);
 
+    // Waktu saat ini
+    $current_time = date('Y-m-d H:i:s');
+
     // Query untuk menyimpan data berita ke dalam database
-    $query = "INSERT INTO berita (judul, description, excerpt, tanggal_post, kategori, gambar) VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO berita (judul, description, excerpt, tanggal_post, kategori, gambar, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $koneksi->prepare($query);
-    $stmt->bind_param("ssssss", $judul, $description, $excerpt, $tanggal_post, $kategori, $gambar_name);
+    $stmt->bind_param("ssssssss", $judul, $description, $excerpt, $tanggal_post, $kategori, $gambar_name, $current_time, $current_time);
 
     // Eksekusi query
     if ($stmt->execute()) {

@@ -33,7 +33,7 @@ if ($result && $result->num_rows > 0) {
         <div class="content-box-input">
             <h2 class="content-dashboard-title">Tentang Kami Page Settings</h2>
             <!-- Tampilkan gambar yang sudah diunggah sebelumnya -->
-            <?php if (!empty($featured_image_value)) : ?>
+            <div class="preview-box-about">
                 <div class="preview-image">
                     <img src="../assets/img/<?php echo $featured_image_value; ?>" alt="Featured Image" width="200">
                     <?php
@@ -42,14 +42,14 @@ if ($result && $result->num_rows > 0) {
                         ?>
                     <p class="name"><?php echo $filename; ?></p>
                 </div>
-            <?php endif; ?>
-            <form action="utils/proses_input_tentang_image.php"  method="POST" enctype="multipart/form-data">
-                <div class="form-action">
-                    <label for="image">Featured Image Wide:</label>
-                    <input type="file" name="image" id="image" required>
-                </div>
-                <button type="submit" class="btn add">Simpan Gambar</button>
-            </form>
+                <form action="utils/proses_input_tentang_image.php"  method="POST" enctype="multipart/form-data">
+                    <div class="form-action">
+                        <label for="image">Featured Image Wide:</label>
+                        <input type="file" name="image" id="image" required>
+                    </div>
+                    <button type="submit" class="btn add">Simpan Gambar</button>
+                </form>
+            </div>
             <hr>
             <!-- Form untuk mengedit data lainnya -->
             <form action="utils/proses_input_tentang.php"  method="POST">

@@ -147,7 +147,7 @@
                     <input type="submit" value="Tambah Fasilitas" class="btn add">
                 </form>
 
-                <form action="utils/tambah_gambar_fasilitas.php" method="post" enctype="multipart/form-data" >
+                <form action="utils/tambah_fasilitas_gambar.php" method="post" enctype="multipart/form-data" >
                     <div class="form-action">
                         <label for="gambar">Fasilitas Image:</label>
                         <input type="file" name="gambar" id="gambar" required>
@@ -156,7 +156,7 @@
                 </form>
             </div>
         </div>
-        <div class="content-box-preview">
+        <div class="content-box-preview other">
             <ul>
                 <?php
                 // Query untuk mengambil daftar fasilitas pelatihan
@@ -184,6 +184,27 @@
                 }
                 ?>
             </ul>
+
+            <?php
+                // Ambil daftar gambar dari database
+                $sql = "SELECT image_name, id FROM fasilitas_pelatihan_image LIMIT 1"; // Mengambil satu gambar saja
+                $result_slider = $koneksi->query($sql);
+
+                if ($result_slider->num_rows > 0) {
+                    // Tampilkan gambar dan tombol delete
+                    $row = $result_slider->fetch_assoc();
+                    $path = "../assets/img/" . $row['image_name'];
+                    ?>
+                    <div class="content-box-preview-item">
+                        <img src="<?php echo $path; ?>" alt="<?php echo $row['image_name']; ?>" width="200">
+                        <p><?php echo $row['image_name']; ?></p>
+                    </div>
+                    <?php
+                } else {
+                    echo "Tidak ada gambar yang tersedia.";
+                }
+            ?>
+
         </div>
     </div>
 
@@ -200,16 +221,16 @@
                     <input type="submit" value="Tambah daftar" class="btn add">
                 </form>
 
-                <form action="utils/tambah_gambar_choose.php" method="post" enctype="multipart/form-data" >
+                <form action="utils/tambah_choose_us_gambar.php" method="post" enctype="multipart/form-data" >
                     <div class="form-action">
-                        <label for="gambar">Fasilitas Image:</label>
+                        <label for="gambar">Choose Us Image:</label>
                         <input type="file" name="gambar" id="gambar" required>
                     </div>
                     <input type="submit" value="Tambah Gambar" class="btn add">
                 </form>
             </div>
         </div>
-        <div class="content-box-preview">
+        <div class="content-box-preview other">
             <ul>
                 <?php
                 // Query untuk mengambil daftar fasilitas pelatihan
@@ -237,6 +258,25 @@
                 }
                 ?>
             </ul>
+            <?php
+                // Ambil daftar gambar dari database
+                $sql = "SELECT image_name, id FROM memilih_kami_gambar LIMIT 1"; // Mengambil satu gambar saja
+                $result_slider = $koneksi->query($sql);
+
+                if ($result_slider->num_rows > 0) {
+                    // Tampilkan gambar dan tombol delete
+                    $row = $result_slider->fetch_assoc();
+                    $path = "../assets/img/" . $row['image_name'];
+                    ?>
+                    <div class="content-box-preview-item">
+                        <img src="<?php echo $path; ?>" alt="<?php echo $row['image_name']; ?>" width="200">
+                        <p><?php echo $row['image_name']; ?></p>
+                    </div>
+                    <?php
+                } else {
+                    echo "Tidak ada gambar yang tersedia.";
+                }
+            ?>
         </div>
     </div>
 
@@ -284,10 +324,7 @@
             ?>
         </div>
     </div>
-
-
 </div>
-
 <!-- Footer Includes -->
 <?php 
 	require_once "reuse/footer-dashboard.php"; 
